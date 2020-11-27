@@ -10,7 +10,7 @@ import java.io.File;
 public class Kafka2Kafka {
     public static void main(String[] args) throws Exception {
         env.setParallelism(1);
-        env.enableCheckpointing(10*1000);
+        env.enableCheckpointing(10 * 1000);
         String source = FileUtils.readFileToString(new File("connector-kafka/src/main/resources/kafka-source.sql"));
         String sink = FileUtils.readFileToString(new File("connector-kafka/src/main/resources/kafka-sink.sql"));
         tEnv.executeSql(source);
