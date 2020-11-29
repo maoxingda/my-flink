@@ -1,12 +1,11 @@
-CREATE TABLE `Sink`
+CREATE TABLE `pv`
 (
-    `user`  VARCHAR,
-    `cTime` VARCHAR,
-    `url`   VARCHAR
+    `url` VARCHAR,
+    `cnt` BIGINT
 )
 WITH (
     'connector' = 'kafka',
-    'topic' = 'user_behavior_sink',
+    'topic' = 'pv',
     'properties.bootstrap.servers' = 'localhost:9092',
-    'format' = 'json'
+    'format' = 'csv'
 )

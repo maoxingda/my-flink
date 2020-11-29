@@ -1,14 +1,13 @@
-CREATE TABLE `Source`
+CREATE TABLE `user_behavior_log`
 (
-    `user`  VARCHAR,
-    `cTime` VARCHAR,
-    `url`   VARCHAR
+    `user` VARCHAR,
+    `url`  VARCHAR
 )
 WITH (
     'connector' = 'kafka',
-    'topic' = 'user_behavior_source',
+    'topic' = 'user_behavior_log',
     'properties.bootstrap.servers' = 'localhost:9092',
     'properties.group.id' = 'testGroup',
-    'format' = 'json',
+    'format' = 'csv',
     'scan.startup.mode' = 'latest-offset'
 )

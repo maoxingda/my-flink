@@ -11,11 +11,12 @@ public class Kafka2Kafka {
     public static void main(String[] args) throws Exception {
         env.setParallelism(1);
         env.enableCheckpointing(10 * 1000);
-        String source = FileUtils.readFileToString(new File("connector-kafka/src/main/resources/kafka-source.sql"));
-        String sink = FileUtils.readFileToString(new File("connector-kafka/src/main/resources/kafka-sink.sql"));
-        tEnv.executeSql(source);
-        tEnv.executeSql(sink);
-        tEnv.executeSql("insert into Sink select * from Source");
+        String user_behavior_log = FileUtils.readFileToString(new File("connector-kafka/src/main/resources/kafka-source.sql"));
+        String pv = FileUtils.readFileToString(new File("connector-kafka/src/main/resources/kafka-sink.sql"));
+        tEnv.executeSql(user_behavior_log);
+        tEnv.executeSql(pv);
+//        tEnv.executeSql("insert into `pv` select `url`, count(`user`) from `user_behavior_log` group by `url`");
+        tEnv.executeSql("insert into `pv` select `url`, 1 from `user_behavior_log`");
         env.execute("kafka2kafka");
     }
 
